@@ -1,36 +1,40 @@
-import * as THREE from 'three'
+import * as ASSETS from './utils/AssetManager';
+
+import MainScene from './MainScene';
+import Renderer from './Renderer';
 
 const CANVAS = document.getElementById("canvas");
 
 let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
 
-let camera;
-let scene;
+let prevFrame;
+
+let mainscene;
 let renderer;
 
-let mesh;
+ASSETS.start_loading( () => {
+    console.log("Finished loading resources!");
+    init()
+});
 
-const init = () => {
-    camera = new THREE.PerspectiveCamera(70, WIDTH/HEIGHT, 0.01, 10);
-    camera.position.z = 1;
+const init = function() {
+    renderer = new Renderer(CANVAS, WIDTH, HEIGHT);
 
-    scene = new THREE.Scene();
+    mainscene = new MainScene(renderer);
+    mainscene.init();
 
-    let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-    let material = new THREE.MeshNormalMaterial();
-
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add(mesh)
-
-    renderer = new THREE.WebGLRenderer( {canvas: CANVAS, antialias: true} );
-    renderer.setSize(WIDTH, HEIGHT);
+    prevFrame = Date.now();
 
     requestAnimationFrame(draw);
 }
 
 const draw = () => {
-    renderer.render(scene, camera);
+    let now = Date.now();
+    let delta = 1 / (now - prevFrame);
+    prevFrame = now;
+    
+    mainscene.draw(delta);
 
     requestAnimationFrame(draw);
 }
@@ -39,10 +43,8 @@ const resize = () => {
     WIDTH = window.innerWidth;
     HEIGHT = window.innerHeight;
 
-    camera.aspect = WIDTH / HEIGHT;
-    camera.updateProjectionMatrix();
     renderer.setSize(WIDTH, HEIGHT);
+    mainscene.resize();
 }
 
-window.onload = init;
 window.onresize = resize;
