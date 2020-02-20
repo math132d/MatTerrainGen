@@ -31,7 +31,7 @@ const init = function() {
 
 const draw = () => {
     let now = Date.now();
-    let delta = 1 / (now - prevFrame);
+    let delta = (now - prevFrame) / 1000;
     prevFrame = now;
     
     mainscene.draw(delta);

@@ -21,9 +21,8 @@ function MainScene (renderer) {
 MainScene.prototype.init = function() {
     this.camera.position.set(0, 0.3, 1);
 
-    let terrainBuilder = new TerrainBuilder(1000, AM.ASSETS["heightmap"]);
+    let terrainBuilder = new TerrainBuilder(512, AM.ASSETS["heightmap"]);
     this.terrain = terrainBuilder.build();
-    this.terrain.rotateX(-Math.PI/2);
 
     let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
     let material = new THREE.MeshNormalMaterial();

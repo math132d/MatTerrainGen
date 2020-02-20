@@ -23,8 +23,8 @@ vec3 calcNormal(vec2 uv, float texelSize) {
 void main() {
     vUv = uv;
 
-    vec3 normal_view = normalMatrix * calcNormal(vUv, 1.0 / 256.0);
-    vec3 light_dir = (modelViewMatrix * vec4(1.0, 0.0, 0.0, 1.0)).xyz;
+    vec3 normal_view = normalMatrix * calcNormal(vUv, 1.0 / 512.0) ;
+    vec3 light_dir = (modelMatrix * vec4(0.0, 0.3, 1.0, 1.0)).xyz;
 
     angle_to_light = dot(normal_view, light_dir);
 
