@@ -1,9 +1,12 @@
+uniform mat4 inverseModelMatrix;
+
 uniform sampler2D heightmap;
 uniform float scale;
 
+varying vec3 vNormal;
 varying vec2 vUv;
-varying float slope;
-varying float angle_to_light;
+
+varying float vSlope;
 
 vec3 calcNormal(vec2 uv, float texelSize) {
 
@@ -16,24 +19,20 @@ vec3 calcNormal(vec2 uv, float texelSize) {
     vec3 normal;
     normal.z = h.r - h.a;
     normal.x = h.g - h.b;
-    normal.y = 0.03;
+    normal.y = (1.0 / (255.0 * scale));
 
     return normalize(normal);
 }
 
 void main() {
-    vUv = uv;
-
     float texelSize = 1.0 / 512.0;
 
-    vec3 normal_view = calcNormal(vUv, texelSize);
-    vec3 light_dir = vec3(0.0, 0.3, 1.0);
+    vUv = uv;
+    vNormal = calcNormal(vUv, texelSize);
 
-    slope = abs(dot(vec3(normal_view.zx, 0.0), normal_view));
-    angle_to_light = dot(normal_view, light_dir);
+    vSlope = abs(dot(vec3(vNormal.zx, 0.0), vNormal));
 
     vec3 pos_local = position + (normal * texture2D(heightmap, uv).r) * scale;
-
     vec3 pos_view = (modelViewMatrix * vec4(pos_local.xyz, 1.0)).xyz;
 
     gl_Position = projectionMatrix * vec4(pos_view, 1.0);
