@@ -11,6 +11,9 @@ let start_loading = async function( onfinish ){
     this.ASSETS["grass"] = await load_texture(textureLoader, 'assets/grass.jpg');
     this.ASSETS["rock"] = await load_texture(textureLoader, 'assets/rock.jpg');
 
+    this.ASSETS["water_normal_01"] = await load_texture(textureLoader, 'assets/Water_1_M_Normal.jpg');
+    this.ASSETS["water_normal_02"] = await load_texture(textureLoader, 'assets/Water_2_M_Normal.jpg');
+
     this.ASSETS["heightmap"].wrapS = THREE.RepeatWrapping;
     this.ASSETS["heightmap"].wrapT = THREE.RepeatWrapping;
 

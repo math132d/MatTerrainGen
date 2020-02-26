@@ -13,7 +13,7 @@ varying float vSlope;
 void main() {
     vec3 color = mix(texture2D(flatmap, vUv*10.0).rgb, texture2D(edgemap, vUv*10.0).rgb, vSlope);
 
-    vec3 ambient = color * vec3(0.15, 0.2, 0.3);
+    vec3 ambient = color * vec3(0.3, 0.4, 0.45);
     vec3 diffuse = color * lightCol * max(0.0, dot(normalize(vNormal), worldLightPos));
 
     gl_FragColor = vec4(ambient+diffuse, 1.0);
