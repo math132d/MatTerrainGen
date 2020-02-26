@@ -41,7 +41,6 @@ MainScene.prototype.init = function() {
 
 MainScene.prototype.draw = function(delta) {
     this.control.update();
-    //this.terrainBuilder.get_mesh().rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), 0.1*delta);
     this.renderer.render(this.scene, this.camera);
 }
 
