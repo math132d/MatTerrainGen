@@ -5,6 +5,13 @@ import Renderer from './Renderer';
 
 const CANVAS = document.getElementById("canvas");
 
+const range = document.getElementById("range");
+
+range.addEventListener("input", () => {
+    let value = range.value / 100;
+    mainscene.terrainBuilder.get_mesh().material.uniforms.scale.value = value;
+})
+
 let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
 
