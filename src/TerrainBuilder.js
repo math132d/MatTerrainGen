@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import * as AM from './utils/AssetManager';
 
+const HEIGHTMAP = document.getElementById("heightmap");
+
 function TerrainBuilder(detail, heightmap) {
     this.scale = 0.5; //Scale for terrain
 
@@ -29,7 +31,7 @@ function TerrainBuilder(detail, heightmap) {
         },
         heightmap: {
             type: "t",
-            value: heightmap
+            value: this.texture
         },
         flatmap: {
             type: "t",
@@ -49,6 +51,10 @@ function TerrainBuilder(detail, heightmap) {
 
 TerrainBuilder.prototype.get_mesh = function() {
     return this.mesh;
+}
+
+TerrainBuilder.prototype.update_texture = function() {
+    this.mesh.material.uniforms.heightmap.value = new THREE.CanvasTexture(HEIGHTMAP);
 }
 
 export { TerrainBuilder as default }
