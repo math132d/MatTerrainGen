@@ -14,7 +14,7 @@ console_error_panic_hook = "0.1.6"
 wee_alloc = { version = "0.4.2", optional = true }
 
 [dependencies.rust_perlin]
-path = "D:/Mathias/Documents/Rust/rust_perlin"
+git = "https://github.com/math132d/rust_perlin"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.2"
