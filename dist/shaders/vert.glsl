@@ -30,7 +30,7 @@ void main() {
     vUv = uv;
     vNormal = calcNormal(vUv, texelSize);
 
-    vSlope = abs(dot(vec3(vNormal.zx, 0.0), vNormal));
+    vSlope = abs(dot(vec3(1.0, 0.0, 0.0), vNormal));
 
     vec3 pos_local = position + (normal * texture2D(heightmap, uv).r) * scale;
     vec3 pos_view = (modelViewMatrix * vec4(pos_local.xyz, 1.0)).xyz;

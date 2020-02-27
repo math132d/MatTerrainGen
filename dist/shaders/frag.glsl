@@ -10,8 +10,12 @@ varying vec2 vUv;
 
 varying float vSlope;
 
+float minSlope = 0.6;
+float maxSlope = 1.0;
+
 void main() {
-    vec3 color = mix(texture2D(flatmap, vUv*10.0).rgb, texture2D(edgemap, vUv*10.0).rgb, vSlope);
+    float slope = clamp((vSlope - minSlope) * (1.0 / (maxSlope-minSlope)), 0.0, 1.0);
+    vec3 color = mix(texture2D(flatmap, vUv*10.0).rgb, texture2D(edgemap, vUv*10.0).rgb, slope);
 
     vec3 ambient = color * vec3(0.3, 0.4, 0.45);
     vec3 diffuse = color * lightCol * max(0.0, dot(normalize(vNormal), worldLightPos));
