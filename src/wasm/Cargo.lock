@@ -202,6 +202,7 @@ dependencies = [
 [[package]]
 name = "rust_perlin"
 version = "0.1.0"
+source = "git+https://github.com/math132d/rust_perlin#43042bb86439be4bb73f641c531248fc787efb94"
 dependencies = [
  "rand",
 ]

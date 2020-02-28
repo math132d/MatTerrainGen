@@ -4,16 +4,49 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link href="https://css.gg/c?=|close|menu-left" rel="stylesheet">
         <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="window.css">
 
         <title>Document</title>
     </head>
 
     <body>
-        <div class="absolute" >
-            <input id="range" type="range" min="0" max="100" value="50">
-            <input id="gen_hm" type="button" value="generate map">
-            <canvas id="heightmap" width="512" height="512" style="display: none;"></canvas>
+        <a id="open_settings" class="icon_btn absolute" ><i class="gg-menu-left"></i></a>
+        <div class="window" id="window">
+            <div class="dragbar" >
+                <a id="close_settings" ><i class="gg-close"></i></a>
+            </div>
+            <div class="fill flex flex--row" >
+                <div class="flex flex--col">
+                    <h3>HeightMap</h3>                  
+                    <div>
+                        <label for="hm_size">Size: </label><br>
+                        <input id="hm_size" type="number" value="512">
+                    </div>
+                    <div>
+                        <label for="hm_freq">Frequency: </label><br>
+                        <input id="hm_freq" type="number" value="6" min="0" max="32">
+                    </div>
+                    <div>
+                        <label for="hm_oct">Octaves: </label><br>
+                        <input id="hm_oct" type="number" value="4" min="0" max="8">
+                    </div>
+                    <input id="gen_hm" type="button" value="generate">
+                </div>
+                <div class="flex flex--col">
+                    <h3>Terrain</h3>
+                    <div>
+                        <label for="tr_height">Terrain Height: </label> <br>
+                        <input id="tr_height" type="range" min="0" max="1000" value="20">
+                    </div>
+                    <div>
+                        <label for="tr_water">Water Level: </label> <br>
+                        <input id="tr_water" type="range" min="0" max="1000" value="20">
+                    </div>
+                </div>
+            </div>
+            <canvas id="heightmap" width="512" height="512"></canvas>
         </div>
         <canvas id="canvas"></canvas>
 
