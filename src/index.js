@@ -5,6 +5,10 @@ import Renderer from './Renderer';
 
 import { noise_to_canvas } from 'wasm';
 
+/*
+ * DEFINITION OF CONSTANTS
+ */
+
 const SETTINGS = document.getElementById("window");
 const CLOSE_SETTINGS = document.getElementById("close_settings");
 const OPEN_SETTINGS = document.getElementById("open_settings");
@@ -16,12 +20,56 @@ const in_water = document.getElementById("tr_water");
 const in_range = document.getElementById("tr_height");
 const in_gen = document.getElementById("gen_hm");
 
+/*
+ * CALLBACKS FOR UI ELEMENTS
+ */
+
+const resize = () => {
+    WIDTH = window.innerWidth;
+    HEIGHT = window.innerHeight;
+
+    renderer.setSize(WIDTH, HEIGHT);
+    mainscene.resize();
+}
+
+const update_map = () => {
+    const size = document.getElementById("hm_size").value;
+    const freq = document.getElementById("hm_freq").value;
+    const oct = document.getElementById("hm_oct").value;
+
+    const w = size;
+    const h = size;
+
+    console.log(`${w}, ${h}`);
+
+    let pixel_view = new Uint8ClampedArray(w * h * 4);
+    noise_to_canvas(w, h, freq, oct, pixel_view);
+    let imageData = new ImageData(pixel_view, w, h);
+    HEIGHTMAP_CTX.putImageData(imageData, 0, 0);
+
+    mainscene.terrainBuilder.update_texture();
+}
+
+const toggle_settings_panel = () => {
+    if( SETTINGS.hasAttribute("closed") ){
+        SETTINGS.removeAttribute("closed");
+    }else{
+        SETTINGS.setAttribute("closed", "true");
+    }
+}
+
+/*
+ * LISTENERS FOR UI ELEMENTS
+ */
+
+window.onresize = resize;
+
 CLOSE_SETTINGS.addEventListener("click", () => {
-    toggle_settings();
+    toggle_settings_panel();
 })
 
 OPEN_SETTINGS.addEventListener("click", () => {
-    toggle_settings();
+    toggle_settings_panel();
 })
 
 in_gen.addEventListener("click", () => {
@@ -37,6 +85,10 @@ in_water-addEventListener("input", () => {
     let value = in_water.value / 1000;
     mainscene.water.position.y = value;
 })
+
+/*
+ * MAIN RENDER LOOP AND SCENE INIT
+ */
 
 let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
@@ -73,39 +125,3 @@ const draw = () => {
 
     requestAnimationFrame(draw);
 }
-
-const resize = () => {
-    WIDTH = window.innerWidth;
-    HEIGHT = window.innerHeight;
-
-    renderer.setSize(WIDTH, HEIGHT);
-    mainscene.resize();
-}
-
-const update_map = () => {
-    const size = document.getElementById("hm_size").value;
-    const freq = document.getElementById("hm_freq").value;
-    const oct = document.getElementById("hm_oct").value;
-
-    const w = size;
-    const h = size;
-
-    console.log(`${w}, ${h}`);
-
-    let pixel_view = new Uint8ClampedArray(w * h * 4);
-    noise_to_canvas(w, h, freq, oct, pixel_view);
-    let imageData = new ImageData(pixel_view, w, h);
-    HEIGHTMAP_CTX.putImageData(imageData, 0, 0);
-
-    mainscene.terrainBuilder.update_texture();
-}
-
-const toggle_settings = () => {
-    if( SETTINGS.hasAttribute("closed") ){
-        SETTINGS.removeAttribute("closed");
-    }else{
-        SETTINGS.setAttribute("closed", "true");
-    }
-}
-
-window.onresize = resize;

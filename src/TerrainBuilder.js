@@ -3,8 +3,8 @@ import * as AM from './utils/AssetManager';
 
 const HEIGHTMAP = document.getElementById("heightmap");
 
-function TerrainBuilder(detail, heightmap) {
-    this.scale = 0.5; //Scale for terrain
+function TerrainBuilder(detail) {
+    this.scale = 0.5; //Terrain height
 
     this.geometry = new THREE.PlaneBufferGeometry(1, 1, detail, detail);
 
@@ -31,7 +31,7 @@ function TerrainBuilder(detail, heightmap) {
         },
         heightmap: {
             type: "t",
-            value: this.texture
+            value: undefined,
         },
         flatmap: {
             type: "t",
@@ -44,9 +44,6 @@ function TerrainBuilder(detail, heightmap) {
     }
 
     this.mesh.material.uniforms = this.uniforms;
-    this.mesh.onAfterRender(() => {
-        this.mesh.material.uniforms.inverseModelMatrix.value = this.mesh.matrixWorld.getInverse(this.mesh.matrixWorld);
-    });
 }
 
 TerrainBuilder.prototype.get_mesh = function() {
