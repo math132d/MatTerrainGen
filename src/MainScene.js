@@ -52,7 +52,7 @@ MainScene.prototype.init = function() {
         textureHeight: 1024
     } );
 
-    this.water.position.y = 0.1;
+    this.water.position.y = 0.25;
     this.water.rotation.x = Math.PI * - 0.5;
 
     this.box = new THREE.Mesh( geometry, material );
