@@ -6,6 +6,8 @@ const HEIGHTMAP = document.getElementById("heightmap");
 function TerrainBuilder(detail) {
     this.scale = 0.5; //Terrain height
 
+    this.detail = detail;
+
     this.geometry = new THREE.PlaneBufferGeometry(1, 1, detail, detail);
 
     this.geometry.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
@@ -52,6 +54,15 @@ TerrainBuilder.prototype.get_mesh = function() {
 
 TerrainBuilder.prototype.update_texture = function() {
     this.mesh.material.uniforms.heightmap.value = new THREE.CanvasTexture(HEIGHTMAP);
+}
+
+TerrainBuilder.prototype.update = function (detail) {
+    if (detail != this.detail){
+        console.log(`new resolution: ${detail}`);
+        this.detail = detail;
+        this.geometry = new THREE.PlaneBufferGeometry(1, 1, detail, detail);
+    }
+    this.update_texture();
 }
 
 export { TerrainBuilder as default }

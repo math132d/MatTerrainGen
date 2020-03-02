@@ -28,7 +28,7 @@ MainScene.prototype.init = function() {
     this.camera.position.set(0, 0.3, 1);
     this.control.update();
 
-    this.terrainBuilder = new TerrainBuilder(512, document.getElementById("heightmap"));
+    this.terrainBuilder = new TerrainBuilder(512);
 
     let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
     let material = new THREE.MeshNormalMaterial();

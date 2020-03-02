@@ -40,14 +40,17 @@ const update_map = () => {
     const w = size;
     const h = size;
 
-    console.log(`${w}, ${h}`);
+    //console.log(`${w}, ${h}`);
 
     let pixel_view = new Uint8ClampedArray(w * h * 4);
     noise_to_canvas(w, h, freq, oct, pixel_view);
     let imageData = new ImageData(pixel_view, w, h);
+
+    HEIGHTMAP.width  = w;
+    HEIGHTMAP.height = h;
     HEIGHTMAP_CTX.putImageData(imageData, 0, 0);
 
-    mainscene.terrainBuilder.update_texture();
+    mainscene.terrainBuilder.update(size);
 }
 
 const toggle_settings_panel = () => {
