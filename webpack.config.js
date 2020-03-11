@@ -7,6 +7,7 @@ module.exports = {
     port: 8080
   },
   entry: './src/bootstrap.js',
+  mode: "development",
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),

@@ -1,0 +1,89 @@
+div.window {
+    position: absolute; top: 0px; left: 0px;
+
+    width: 20rem;
+    max-width: 100%;
+
+    border-radius: 0 0 8px 8px;
+
+    display: inline-block;
+    background: #eeeeee;
+
+    transition: left 0.2s ease-in-out;
+}
+
+div.window[closed] {
+    left: -20rem;
+}
+
+div.window .dragbar {
+    width: 100%;
+    height: 2rem;
+    overflow: hidden;
+    background: #dddddd;
+}
+
+div.window .dragbar i {
+    color: #555555;
+    margin: calc((2rem - 22px) / 2);
+    margin-left: auto;
+}
+
+div.window .dragbar i:hover {
+    color: #000000;
+}
+
+
+div.window input {
+    width: calc(100% - 10px);
+}
+
+div.window canvas {
+    width: 100%;
+    border-radius: 8px;
+}
+
+div.window label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+div.window .flex--row {
+    margin: 16px 0px;
+}
+
+div.window .flex--col {
+    margin: 0px 16px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex>div {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.flex--row {
+    flex-direction: row;
+}
+
+.flex--row>div {
+    margin-left: 8px;
+}
+
+.flex--col {
+    flex-direction: column;
+}
+
+.flex--col>div {
+    margin-bottom: 8px;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+}

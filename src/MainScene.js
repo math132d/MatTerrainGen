@@ -28,7 +28,7 @@ MainScene.prototype.init = function() {
     this.camera.position.set(0, 0.3, 1);
     this.control.update();
 
-    this.terrainBuilder = new TerrainBuilder(512, document.getElementById("heightmap"));
+    this.terrainBuilder = new TerrainBuilder(512);
 
     let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
     let material = new THREE.MeshNormalMaterial();
@@ -52,7 +52,7 @@ MainScene.prototype.init = function() {
         textureHeight: 1024
     } );
 
-    this.water.position.y = 0.1;
+    this.water.position.y = 0.25;
     this.water.rotation.x = Math.PI * - 0.5;
 
     this.box = new THREE.Mesh( geometry, material );
