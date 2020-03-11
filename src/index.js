@@ -84,8 +84,9 @@ in_range.addEventListener("input", () => {
     mainscene.terrainBuilder.get_mesh().material.uniforms.scale.value = value;
 })
 
-in_water-addEventListener("input", () => {
+in_water.addEventListener("input", () => {
     let value = in_water.value / 1000;
+    mainscene.terrainBuilder.update_waterlevel(value);
     mainscene.water.position.y = value;
 })
 

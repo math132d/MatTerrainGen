@@ -28,10 +28,13 @@ function TerrainBuilder(detail) {
             value: new THREE.Vector3(1.0, 1.0, 0).normalize()
         },
         lightCol: {
-            value: new THREE.Color(1.0, 1.0, 0.9)
+            value: new THREE.Color(1.0, 1.0, 0.95)
         },
         scale: {
             value: this.scale
+        },
+        waterlevel: {
+            value: 0
         },
         transition: {
             value: this.transition
@@ -44,6 +47,10 @@ function TerrainBuilder(detail) {
             type: "t",
             value: AM.ASSETS["grass"]
         },
+        sand: {
+            type: "t",
+            value: AM.ASSETS["sand"]
+        },
         edgemap: {
             type: "t",
             value: AM.ASSETS["rock"]
@@ -55,6 +62,10 @@ function TerrainBuilder(detail) {
 
 TerrainBuilder.prototype.get_mesh = function() {
     return this.mesh;
+}
+
+TerrainBuilder.prototype.update_waterlevel = function(val) {
+    this.mesh.material.uniforms.waterlevel.value = val;
 }
 
 TerrainBuilder.prototype.update_texture = function() {

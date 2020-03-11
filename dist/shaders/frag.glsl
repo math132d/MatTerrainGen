@@ -1,11 +1,14 @@
-uniform sampler2D heightmap;
 uniform sampler2D flatmap;
+uniform sampler2D sand;
 uniform sampler2D edgemap;
 
 uniform vec3 worldLightPos;
 uniform vec3 lightCol;
 
+uniform float waterlevel;
+
 varying vec3 vNormal;
+varying vec3 vPosition;
 varying vec2 vUv;
 
 varying float vSlope;
@@ -13,13 +16,25 @@ varying float vSlope;
 float minSlope = 0.6;
 float maxSlope = 1.0;
 
+float tile = 20.0;
+
 void main() {
     float slope = clamp((vSlope - minSlope) * (1.0 / (maxSlope-minSlope)), 0.0, 1.0);
-    vec3 color = mix(texture2D(flatmap, vUv*10.0).rgb, texture2D(edgemap, vUv*10.0).rgb, slope);
 
-    vec3 ambient = color * vec3(0.3, 0.4, 0.45);
+    float sand_mask = clamp(1.0 - ((vPosition.y - waterlevel) * (1.0 / 0.02)), 0.0, 1.0);
+
+    vec3 surface = mix(texture2D(flatmap, vUv*tile).rgb, texture2D(edgemap, vPosition.zy*tile).rgb, slope);
+    vec3 color = mix(surface, texture2D(sand, vUv*tile).rgb, sand_mask);
+
+
+    float att = clamp((vPosition.y+0.01) * (1.0 / (waterlevel+0.01)), 0.0, 1.0);
+
+    vec3 ambient = color * vec3(0.25, 0.25, 0.35);
     vec3 diffuse = color * lightCol * max(0.0, dot(normalize(vNormal), worldLightPos));
 
-    gl_FragColor = vec4(ambient+diffuse, 1.0);
-    //gl_FragColor = vec4(vNormal, 1.0);
+    //gl_FragColor = vec4(ambient+diffuse, 1.0);
+
+    
+    //gl_FragColor = vec4(col, col, col, 1.0);
+    gl_FragColor = vec4(att * (diffuse+ambient), 1.0);
 }

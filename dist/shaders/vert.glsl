@@ -7,6 +7,7 @@ uniform float scale;
 uniform float transition;
 
 varying vec3 vNormal;
+varying vec3 vPosition;
 varying vec2 vUv;
 
 varying float vSlope;
@@ -58,6 +59,7 @@ void main() {
     vSlope = abs(dot(vec3(1.0, 0.0, 0.0), vNormal));
 
     vec3 pos_local = position + (normal * texture2D(heightmap, uv).r) * scale * slopeScale(uv);
+    vPosition = pos_local;
     vec3 pos_view = (modelViewMatrix * vec4(pos_local.xyz, 1.0)).xyz;
 
     gl_Position = projectionMatrix * vec4(pos_view, 1.0);

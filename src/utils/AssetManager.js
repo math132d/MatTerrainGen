@@ -8,7 +8,7 @@ let start_loading = async function( onfinish ){
     this.ASSETS["vertexShader"] = await ( await fetch('shaders/vert.glsl')).text();
     this.ASSETS["fragmentShader"] = await ( await fetch('shaders/frag.glsl')).text();
     this.ASSETS["sand"] = await load_texture(textureLoader, 'assets/sand.jpg');
-    this.ASSETS["grass"] = await load_texture(textureLoader, 'assets/grass.jpg');
+    this.ASSETS["grass"] = await load_texture(textureLoader, 'assets/grass_3.jpg');
     this.ASSETS["rock"] = await load_texture(textureLoader, 'assets/cliffs.jpg');
 
     this.ASSETS["water_normal_01"] = await load_texture(textureLoader, 'assets/Water_1_M_Normal.jpg');
