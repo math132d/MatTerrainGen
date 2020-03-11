@@ -31,8 +31,8 @@ pub fn noise_to_canvas(width: usize, height: usize, frequency: u32, octaves: u32
 
     for index in 0..(width*height) {
         let gray = noise.noise(
-            (index % width) as f32 / width as f32,
-            (index / width) as f32 / height as f32
+            ((index % width) as f32 / width as f32),
+            ((index / width) as f32 / height as f32)
         );
 
         let gray = (gray * 255f32) as u8;

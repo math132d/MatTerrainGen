@@ -21,6 +21,8 @@ function TerrainBuilder(detail) {
 
     this.mesh = new THREE.Mesh( this.geometry, this.shader );
 
+    this.transition = 0.0;
+
     this.uniforms = {
         worldLightPos: {
             value: new THREE.Vector3(1.0, 1.0, 0).normalize()
@@ -30,6 +32,9 @@ function TerrainBuilder(detail) {
         },
         scale: {
             value: this.scale
+        },
+        transition: {
+            value: this.transition
         },
         heightmap: {
             type: "t",
@@ -42,7 +47,7 @@ function TerrainBuilder(detail) {
         edgemap: {
             type: "t",
             value: AM.ASSETS["rock"]
-        }
+        },
     }
 
     this.mesh.material.uniforms = this.uniforms;
@@ -62,6 +67,7 @@ TerrainBuilder.prototype.update = function (detail) {
         this.detail = detail;
         this.geometry = new THREE.PlaneBufferGeometry(1, 1, detail, detail);
     }
+
     this.update_texture();
 }
 
