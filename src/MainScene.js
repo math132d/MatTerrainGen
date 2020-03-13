@@ -33,11 +33,15 @@ MainScene.prototype.init = function() {
     let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
     let material = new THREE.MeshNormalMaterial();
 
-    var waterGeometry = new THREE.PlaneBufferGeometry( 1, 1 );
+    var planeGeomery = new THREE.PlaneBufferGeometry( 10, 10 );
+
+    this.plane = new THREE.Mesh( planeGeomery, new THREE.MeshBasicMaterial( {color: "#013"} ) );
+
+    var waterGeometry = new THREE.PlaneBufferGeometry( 10, 10 );
 
     var params = {
         color: '#00eeff',
-        scale: 4,
+        scale: 40,
         flowX: 1,
         flowY: 1
     };
@@ -54,12 +58,16 @@ MainScene.prototype.init = function() {
 
     this.water.position.y = 0.25;
     this.water.rotation.x = Math.PI * - 0.5;
+    this.plane.position.y = 0.003;
+    this.plane.rotation.x = Math.PI * - 0.5;
+
 
     this.box = new THREE.Mesh( geometry, material );
 
     this.scene.add(this.camera);
     //this.scene.add(this.box);
     this.scene.add(this.water);
+    this.scene.add(this.plane)
     this.scene.add(this.terrainBuilder.get_mesh());
 }
 
