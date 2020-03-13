@@ -14,6 +14,8 @@ function MainScene (renderer) {
     this.renderer = renderer;
 
     this.scene = new THREE.Scene();
+    this.scene.fog = new THREE.Fog(0x87CEEB, 1, 3);
+    this.scene.background = new THREE.Color(0x87CEEB);
     this.camera = new THREE.PerspectiveCamera(
         70,
         size.x/size.y,
