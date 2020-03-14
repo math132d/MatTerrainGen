@@ -80,12 +80,12 @@ in_gen.addEventListener("click", () => {
 })
 
 in_range.addEventListener("input", () => {
-    let value = in_range.value / 1000;
+    let value = in_range.value;
     mainscene.terrainBuilder.get_mesh().material.uniforms.scale.value = value;
 })
 
 in_water.addEventListener("input", () => {
-    let value = in_water.value / 1000;
+    let value = in_water.value;
     mainscene.terrainBuilder.update_waterlevel(value);
     mainscene.water.position.y = value;
 })
@@ -111,7 +111,7 @@ const init = function() {
     renderer = new Renderer(CANVAS, WIDTH, HEIGHT);
 
     mainscene = new MainScene(renderer);
-    mainscene.init();
+    mainscene.init(in_range.value, in_water.value);
 
     update_map();
 

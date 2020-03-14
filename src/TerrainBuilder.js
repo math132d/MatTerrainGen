@@ -3,8 +3,8 @@ import * as AM from './utils/AssetManager';
 
 const HEIGHTMAP = document.getElementById("heightmap");
 
-function TerrainBuilder(detail) {
-    this.scale = 0.5; //Terrain height
+function TerrainBuilder(detail, scale) {
+    this.scale = scale; //Terrain height
 
     this.detail = detail;
 

@@ -26,11 +26,11 @@ function MainScene (renderer) {
     this.control = new OrbitControls(this.camera, renderer.domElement);
 }
 
-MainScene.prototype.init = function() {
+MainScene.prototype.init = function(terrainHeight, waterHeight) {
     this.camera.position.set(0, 0.3, 1);
     this.control.update();
 
-    this.terrainBuilder = new TerrainBuilder(512);
+    this.terrainBuilder = new TerrainBuilder(512, terrainHeight);
 
     let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
     let material = new THREE.MeshNormalMaterial();
@@ -58,8 +58,10 @@ MainScene.prototype.init = function() {
         textureHeight: 1024
     } );
 
-    this.water.position.y = 0.25;
+    this.water.position.y = waterHeight;
+    this.terrainBuilder.update_waterlevel(waterHeight);
     this.water.rotation.x = Math.PI * - 0.5;
+
     this.plane.position.y = 0.003;
     this.plane.rotation.x = Math.PI * - 0.5;
 
