@@ -1,7 +1,5 @@
 # MatTerrainGen
 
-#### Try a live demo at [terrain.thestaticcow.dk](http://terrain.thestaticcow.dk)
-
 ![example hills](example_01.png)
 
 ### Purpose
